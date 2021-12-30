@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="testId" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
+  <bpmn2:process id="RuleFlow.Test" drools:packageName="com.example.ruleflow" drools:version="1.0" drools:adHoc="false" name="Flow" isExecutable="true" processType="Public">
+
+    <!-- process import -->
+    <bpmn2:extensionElements>
+      <drools:import name="com.example.ruleflow.Condition"/>
+    </bpmn2:extensionElements>
+
+    <!-- nodes -->
+    <bpmn2:startEvent id="_1">
+      <bpmn2:outgoing>_1-_2</bpmn2:outgoing>
+    </bpmn2:startEvent>
+
+    <bpmn2:businessRuleTask id="_2" drools:ruleFlowGroup="group1" name="Task1">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Task1]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_1-_2</bpmn2:incoming>
+      <bpmn2:outgoing>_2-_3</bpmn2:outgoing>
+    </bpmn2:businessRuleTask>
+
+    <bpmn2:exclusiveGateway id="_3" drools:dg="_3-_4" gatewayDirection="Diverging" default="_3-_4">
+      <bpmn2:incoming>_2-_3</bpmn2:incoming>
+      <bpmn2:outgoing>_3-_4</bpmn2:outgoing>
+      <bpmn2:outgoing>_3-_7</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+
+    <bpmn2:businessRuleTask id="_4" drools:ruleFlowGroup="group3" name="Task3">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Task3]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_3-_4</bpmn2:incoming>
+      <bpmn2:outgoing>_4-_5</bpmn2:outgoing>
+    </bpmn2:businessRuleTask>
+
+    <bpmn2:businessRuleTask id="_5" drools:ruleFlowGroup="group4" name="Task4">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Task4]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_4-_5</bpmn2:incoming>
+      <bpmn2:outgoing>_5-_6</bpmn2:outgoing>
+    </bpmn2:businessRuleTask>
+
+    <bpmn2:endEvent id="_6">
+      <bpmn2:incoming>_5-_6</bpmn2:incoming>
+    </bpmn2:endEvent>
+
+    <bpmn2:businessRuleTask id="_7" drools:ruleFlowGroup="group2" name="Task2">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Task2]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_3-_7</bpmn2:incoming>
+      <bpmn2:outgoing>_7-_8</bpmn2:outgoing>
+    </bpmn2:businessRuleTask>
+
+    <bpmn2:endEvent id="_8">
+      <bpmn2:incoming>_7-_8</bpmn2:incoming>
+    </bpmn2:endEvent>
+
+    <!-- connections -->
+    <bpmn2:sequenceFlow id="_3-_7" name="yes" sourceRef="_3" targetRef="_7">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[yes]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.jboss.org/drools/rule"><![CDATA[Condition(flag == "yes")]]></bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="_2-_3" sourceRef="_2" targetRef="_3"/>
+    <bpmn2:sequenceFlow id="_1-_2" sourceRef="_1" targetRef="_2">
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="_5-_6" sourceRef="_5" targetRef="_6">
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="_7-_8" sourceRef="_7" targetRef="_8">
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="_4-_5" sourceRef="_4" targetRef="_5">
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="_3-_4" name="no" sourceRef="_3" targetRef="_4">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[no]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
+
+  </bpmn2:process>
+
+  <!-- position -->
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="RuleFlow.Flow">
+      <bpmndi:BPMNShape bpmnElement="_1">
+        <dc:Bounds height="56.0" width="56.0" x="153.0" y="93.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_2">
+        <dc:Bounds height="102.0" width="154.0" x="289.0" y="70.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_3">
+        <dc:Bounds height="56.0" width="56.0" x="523.0" y="93.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_4">
+        <dc:Bounds height="102.0" width="154.0" x="659.0" y="70.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_5">
+        <dc:Bounds height="102.0" width="154.0" x="893.0" y="70.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_6">
+        <dc:Bounds height="56.0" width="56.0" x="1127.0" y="93.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_7">
+        <dc:Bounds height="102.0" width="154.0" x="474.0" y="203.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_8">
+        <dc:Bounds height="56.0" width="56.0" x="708.0" y="226.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_1-_2">
+        <di:waypoint xsi:type="dc:Point" x="209.0" y="121.0"/>
+        <di:waypoint xsi:type="dc:Point" x="289.0" y="121.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_2-_3">
+        <di:waypoint xsi:type="dc:Point" x="443.0" y="121.0"/>
+        <di:waypoint xsi:type="dc:Point" x="523.0" y="121.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_3-_4">
+        <di:waypoint xsi:type="dc:Point" x="579.0" y="121.0"/>
+        <di:waypoint xsi:type="dc:Point" x="659.0" y="121.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_4-_5">
+        <di:waypoint xsi:type="dc:Point" x="813.0" y="121.0"/>
+        <di:waypoint xsi:type="dc:Point" x="893.0" y="121.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_5-_6">
+        <di:waypoint xsi:type="dc:Point" x="1047.0" y="121.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1127.0" y="121.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_3-_7">
+        <di:waypoint xsi:type="dc:Point" x="551.0" y="149.0"/>
+        <di:waypoint xsi:type="dc:Point" x="551.0" y="203.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_7-_8">
+        <di:waypoint xsi:type="dc:Point" x="628.0" y="254.0"/>
+        <di:waypoint xsi:type="dc:Point" x="708.0" y="254.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>

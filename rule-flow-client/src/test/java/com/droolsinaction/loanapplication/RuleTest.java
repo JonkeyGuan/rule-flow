@@ -116,7 +116,7 @@ public class RuleTest {
         commands.add(commandFactory.newInsert(fact));
 
         Command<?> fireAllRules = commandFactory.newFireAllRules();
-        Command<?> process = commandFactory.newStartProcess("RuleFlow.Flow");
+        Command<?> process = commandFactory.newStartProcess("RuleFlow.Test");
         Command<?> getObjectsApplicant = commandFactory.newGetObjects(new ClassObjectFilter(Condition.class),
                 "Condition");
         Command<?> getObjectsLoan = commandFactory.newGetObjects(new ClassObjectFilter(Fact.class), "Fact");
