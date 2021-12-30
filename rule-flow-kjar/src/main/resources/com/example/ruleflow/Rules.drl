@@ -1,0 +1,49 @@
+package com.example.ruleflow;
+
+rule "rule for group1"
+	dialect "mvel"
+	ruleflow-group "group1"
+	when
+		f: Fact(field1 == "field1")
+	then
+	    modify(f) {
+	        setField1("modifided field1")
+	    }
+		System.out.println("Rule fired : [" + drools.getRule().getName()+"]");
+end
+
+rule "rule for group2"
+	dialect "mvel"
+	ruleflow-group "group2"
+	when
+		f: Fact(field2 == "field2")
+	then
+	    modify(f) {
+	        setField2("modifided field2")
+	    }
+		System.out.println("Rule fired : [" + drools.getRule().getName()+"]");
+end
+
+rule "rule for group3"
+	dialect "mvel"
+	ruleflow-group "group3"
+	when
+		f: Fact(field3 == "field3")
+	then
+	    modify(f) {
+	        setField3("modifided field3")
+	    }
+		System.out.println("Rule fired : [" + drools.getRule().getName()+"]");
+end
+
+rule "rule for group4"
+	dialect "mvel"
+	ruleflow-group "group4"
+	when
+		f: Fact(field4 == "field4")
+	then
+	    modify(f) {
+	        setField4("modifided field4")
+	    }
+		System.out.println("Rule fired : [" + drools.getRule().getName()+"]");
+end
